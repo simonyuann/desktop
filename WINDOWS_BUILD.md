@@ -4,11 +4,12 @@
 
 ## 下载
 
-1. 打开本仓库的 **Actions** 页面。
-2. 选择 **Build My Cloud for Windows**。
-3. 打开最新一次成功的运行记录。
-4. 在 **Artifacts** 下载 `my-cloud-windows-portable-...`。
-5. 解压后运行程序。
+1. 打开本仓库右侧的 **Releases**。
+2. 选择标有 **Latest** 的“我的网盘 Windows 版”。
+3. 下载 `MyCloud-Windows-x64.7z`。
+4. 完整解压后运行 `opencloud.exe`。
+
+每次 Windows 构建成功后都会自动创建一个新 Release。Actions 页面也会保留 14 天的构建产物作为备用下载方式。
 
 这是未进行商业代码签名的个人构建，Windows 首次运行时可能显示来源提示。源码和构建过程均保留在本仓库中，便于自行核对。
 
