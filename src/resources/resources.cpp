@@ -115,9 +115,9 @@ QIcon OCC::Resources::loadIcon(const QString &flavor, const QString &name, IconT
 
 QColor Resources::tint()
 {
-    static QColor lilac{"#E2BAFF"};
-    static QColor petrol{"#20434F"};
-    return isUsingDarkTheme() ? lilac : petrol;
+    static QColor lightBlue{"#72A7FF"};
+    static QColor brandBlue{"#0A5BFF"};
+    return isUsingDarkTheme() ? lightBlue : brandBlue;
 }
 
 QIcon OCC::Resources::themeUniversalIcon(const QString &name, IconType iconType)

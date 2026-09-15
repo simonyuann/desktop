@@ -28,6 +28,10 @@ Pane {
 
     spacing: 10
 
+    background: Rectangle {
+        color: "#F5F8FF"
+    }
+
     Accessible.role: Accessible.List
     Accessible.name: qsTr("Folder Sync")
 
@@ -70,6 +74,8 @@ Pane {
             Button {
                 id: manageAccountButton
                 text: qsTr("Manage Account")
+                palette.button: "#EAF2FF"
+                palette.buttonText: "#0F1F3D"
 
                 Menu {
                     id: accountMenu
@@ -163,9 +169,10 @@ Pane {
                         focus: true
 
                         background: Rectangle {
-                            color: scrollView.palette.base
-                            border.width: delegatePane.visualFocus || folderDelegate.ListView.isCurrentItem ? 2 : 0
-                            border.color: delegatePane.visualFocus || folderDelegate.ListView.isCurrentItem ? scrollView.palette.highlight : scrollView.palette.base
+                            color: "#FFFFFF"
+                            radius: 14
+                            border.width: delegatePane.visualFocus || folderDelegate.ListView.isCurrentItem ? 2 : 1
+                            border.color: delegatePane.visualFocus || folderDelegate.ListView.isCurrentItem ? "#0A5BFF" : "#DCE7FA"
                         }
 
                         Keys.onBacktabPressed: {
@@ -372,6 +379,8 @@ Pane {
             Button {
                 id: addSyncButton
                 text: qsTr("Add Space")
+                palette.button: "#0A5BFF"
+                palette.buttonText: "#FFFFFF"
 
                 onClicked: {
                     accountSettings.slotAddFolder();

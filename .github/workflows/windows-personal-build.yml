@@ -1,0 +1,75 @@
+name: Build My Cloud for Windows
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - OPENCLOUD.cmake
+      - src/**
+      - .github/workflows/windows-personal-build.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  windows-portable:
+    name: Windows portable package
+    runs-on: windows-2022
+    timeout-minutes: 120
+    env:
+      CRAFT_TARGET: windows-cl-msvc2022-x86_64
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      CRAFT_PACKAGE_SYMBOLS: "false"
+      SIGN_PACKAGE: "false"
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Cache Craft
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/craft
+          key: my-cloud-craft-${{ runner.os }}-${{ hashFiles('.craft.shelf') }}
+          restore-keys: |
+            my-cloud-craft-${{ runner.os }}-
+
+      - name: Clone CraftMaster
+        run: git clone --depth=1 https://invent.kde.org/kde/craftmaster.git "${home}/craft/CraftMaster/CraftMaster"
+
+      - name: Set up Craft
+        run: |
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" --setup
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --unshelve "${env:GITHUB_WORKSPACE}/.craft.shelf"
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c craft
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c dev-utils/nsis
+
+      - name: Configure personal build
+        run: |
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --set "srcDir=${env:GITHUB_WORKSPACE}" opencloud/opencloud-desktop
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --set "buildBeta=false" opencloud/opencloud-desktop
+          & "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --set "buildNumber=${{ github.run_number }}" opencloud/opencloud-desktop
+
+      - name: Install dependencies
+        run: '& "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --install-deps opencloud/opencloud-desktop'
+
+      - name: Build
+        run: '& "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --no-cache opencloud/opencloud-desktop'
+
+      - name: Create portable package
+        run: '& "${env:GITHUB_WORKSPACE}/.github/workflows/.craft.ps1" -c --no-cache --package --options "[Packager]PackageType=PortablePackager" opencloud/opencloud-desktop'
+
+      - name: Upload My Cloud
+        uses: actions/upload-artifact@v7
+        with:
+          name: my-cloud-windows-portable-${{ github.run_number }}
+          path: ~/craft/binaries/*
+          if-no-files-found: error
+          retention-days: 14

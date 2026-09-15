@@ -33,6 +33,16 @@ ToolButton {
     // we display both, with a custom content item, but qqc2-desktop-style would still render the text
     display: AbstractButton.IconOnly
 
+    palette.buttonText: checked ? "#FFFFFF" : "#1D2A44"
+    palette.highlight: "#0A5BFF"
+
+    background: Rectangle {
+        radius: 12
+        color: control.checked ? "#0A5BFF" : (control.hovered ? "#EAF2FF" : "transparent")
+        border.color: control.visualFocus ? "#0A5BFF" : "transparent"
+        border.width: control.visualFocus ? 2 : 0
+    }
+
     Component {
         id: imageComponent
 
@@ -77,7 +87,7 @@ ToolButton {
         Label {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            color: control.visualFocus ? control.palette.highlight : control.palette.buttonText
+            color: control.checked ? "#FFFFFF" : (control.visualFocus ? "#0A5BFF" : "#1D2A44")
             elide: Text.ElideRight
             font: control.font
             horizontalAlignment: Text.AlignHCenter

@@ -28,7 +28,7 @@ OpenCloudTheme::OpenCloudTheme()
 
 QColor OpenCloudTheme::wizardHeaderBackgroundColor() const
 {
-    return QColor("#20434F");
+    return QColor("#0A5BFF");
 }
 
 QColor OpenCloudTheme::wizardHeaderTitleColor() const
@@ -43,11 +43,11 @@ QIcon OpenCloudTheme::wizardHeaderLogo() const
 
 QmlButtonColor OpenCloudTheme::primaryButtonColor() const
 {
-    return {"#E2BAFF", "#19353F", "#DADADA"};
+    return {"#0A5BFF", "#FFFFFF", "#9EB7E6"};
 }
 
 QmlButtonColor OpenCloudTheme::secondaryButtonColor() const
 {
-    return {"#CA8DF5", "#19353F", "#B0B0B0"};
+    return {"#EAF2FF", "#0F1F3D", "#91A4C7"};
 }
 }

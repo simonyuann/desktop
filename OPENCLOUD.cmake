@@ -1,9 +1,9 @@
-set( APPLICATION_NAME       "OpenCloud Desktop")
+set( APPLICATION_NAME       "我的网盘")
 set( APPLICATION_SHORTNAME  "OpenCloud" )
 set( APPLICATION_EXECUTABLE "opencloud" )
-set( APPLICATION_VENDOR     "OpenCloud" )
+set( APPLICATION_VENDOR     "我的网盘" )
 set( APPLICATION_ICON_NAME  "opencloud" )
-set( APPLICATION_REV_DOMAIN "eu.opencloud.desktop" )
+set( APPLICATION_REV_DOMAIN "com.simonyuann.mycloud" )
 
 if(BETA_CHANNEL_BUILD)
     set( APPLICATION_NAME       "${APPLICATION_NAME} Beta")

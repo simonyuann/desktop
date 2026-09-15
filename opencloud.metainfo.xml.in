@@ -3,7 +3,7 @@
   <id>@APPLICATION_REV_DOMAIN@.@APPLICATION_EXECUTABLE@</id>
   
   <name>@APPLICATION_NAME@</name>
-  <summary>Desktop client for OpenCloud file synchronization</summary>
+  <summary>“我的网盘”桌面同步客户端</summary>
   
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
@@ -15,14 +15,14 @@
 
   <description>
     <p>
-      The OpenCloud Desktop Client synchronizes files between your computer and OpenCloud. It provides offline access, automatic synchronization, and a consistent way to work with files locally.
+      我的网盘在电脑与 OpenCloud 服务器之间同步文件，提供离线访问、自动同步和便捷的本地文件操作。
     </p>
   </description>
 
-  <icon type="remote">https://raw.githubusercontent.com/opencloud-eu/desktop/bb4ac2e5495cbcf8f6455f91d9de8448962e4334/src/resources/theme/universal/opencloud-icon.svg</icon>
+  <icon type="remote">https://raw.githubusercontent.com/simonyuann/desktop/main/src/resources/theme/universal/opencloud-icon.svg</icon>
   <branding>
-    <color type="primary" scheme_preference="light">#E2BAFF</color>
-    <color type="primary" scheme_preference="dark">#20434F</color>
+    <color type="primary" scheme_preference="light">#0A5BFF</color>
+    <color type="primary" scheme_preference="dark">#72A7FF</color>
   </branding>
 
   <content_rating type="oars-1.1" />
@@ -32,7 +32,7 @@
   <url type="faq">https://docs.opencloud.eu/docs/user/desktop-client/common-functionality/multiple-accounts</url>
   <url type="translate">https://explore.transifex.com/opencloud-eu/opencloud-eu</url>
   <url type="contribute">https://github.com/opencloud-eu/opencloud/blob/main/CONTRIBUTING.md</url>
-  <url type="vcs-browser">https://github.com/opencloud-eu/desktop</url>
+  <url type="vcs-browser">https://github.com/simonyuann/desktop</url>
   
   <launchable type="desktop-id">@APPLICATION_EXECUTABLE@.desktop</launchable>
   <screenshots>

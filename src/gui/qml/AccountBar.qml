@@ -21,6 +21,14 @@ import eu.OpenCloud.resources 1.0
 
 Pane {
     id: bar
+
+    padding: 10
+    background: Rectangle {
+        color: "#F5F8FF"
+        radius: 16
+        border.color: "#DCE8FF"
+        border.width: 1
+    }
     readonly property SettingsDialog settingsDialog: ocContext
     readonly property OCQuickWidget widget: ocQuickWidget
 
@@ -50,6 +58,7 @@ Pane {
 
     RowLayout {
         anchors.fill: parent
+        spacing: 8
 
         // don't modify the enabled state directly as it messes with the palette in Qt 6.7.2
         opacity: widget.enabled ? 1.0 : 0.5
