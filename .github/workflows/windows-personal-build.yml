@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 defaults:
   run:
@@ -73,3 +73,28 @@ jobs:
           path: ~/craft/binaries/*
           if-no-files-found: error
           retention-days: 14
+
+      - name: Prepare release file
+        run: |
+          New-Item -ItemType Directory -Force "${env:GITHUB_WORKSPACE}/release" | Out-Null
+          $package = Get-ChildItem "${home}/craft/binaries" -Filter "*.7z" |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $package) {
+            throw "No portable package was produced."
+          }
+          Copy-Item $package.FullName "${env:GITHUB_WORKSPACE}/release/MyCloud-Windows-x64.7z"
+
+      - name: Publish to Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: my-cloud-windows-${{ github.run_number }}
+          name: 我的网盘 Windows 版 #${{ github.run_number }}
+          body: |
+            “我的网盘”Windows 便携版。
+
+            下载 MyCloud-Windows-x64.7z，完整解压后运行 opencloud.exe。
+            这是未进行商业代码签名的个人构建，Windows 首次运行时可能显示安全提示。
+          files: release/MyCloud-Windows-x64.7z
+          fail_on_unmatched_files: true
+          make_latest: true
